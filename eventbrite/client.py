@@ -37,7 +37,7 @@ class Eventbrite(AccessMethodsMixin):
             "Authorization": "Bearer {0}".format(self.oauth_token),
             "User-Agent": "eventbrite-python-sdk {version} ({system})".format(
                 version=__version__,
-                system=platform(),
+                system='Unknown',
             )
         }
         # Resolves the search result response problem
@@ -57,19 +57,19 @@ class Eventbrite(AccessMethodsMixin):
     @objectify
     def get(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
-        return urlfetch.fetch(path, payload=data or {}, method='GET', headers=self.headers)
+        return path, urlfetch.fetch(path, payload=data or {}, method='GET', headers=self.headers, deadline=30)
 
     @objectify
     def post(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
         json_data = json.dumps(data or {})
-        return urlfetch.fetch(path, payload=json_data, method='POST', headers=self.headers)
+        return path, urlfetch.fetch(path, payload=json_data, method='POST', headers=self.headers, deadline=30)
 
     @objectify
     def delete(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
         json_data = json.dumps(data or {})
-        return urlfetch.fetch(path, payload=data or {}, method='DELETE', headers=self.headers)
+        return path, urlfetch.fetch(path, payload=data or {}, method='DELETE', headers=self.headers, deadline=30)
 
     ############################
     #

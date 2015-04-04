@@ -15,9 +15,9 @@ def objectify(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:
-            payload = func(*args, **kwargs)
+            url, payload = func(*args, **kwargs)
         except urlfetch_errors.Error as e:
             raise InternetConnectionError(e)
-        return EventbriteObject.create(payload)
+        return EventbriteObject.create(url, payload)
     return wrapper
 

@@ -40,7 +40,7 @@ class TestEventbriteObject(unittest.TestCase):
             evbobject.resource_uri
         )
         self.assertTrue(isinstance(evbobject.elapsed, timedelta))
-        self.assertTrue(isinstance(evbobject.headers, unicode))
+        self.assertTrue(isinstance(evbobject.headers, dict))
 
     @unittest.skipIf(condition=PY3, reason='Python 3 appears to return stdout')
     def test_pretty(self):

@@ -44,7 +44,7 @@ class TestClient(unittest.TestCase):
 
         self.assertTrue(payload.ok)
         self.assertTrue(isinstance(payload.elapsed, timedelta))
-        self.assertTrue(isinstance(payload.headers, unicode))
+        self.assertTrue(isinstance(payload.headers, dict))
 
     @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
     def test_api_post(self):

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pprint
+import json
 from .utils import reverse
 
 
@@ -13,14 +14,14 @@ class EventbriteObject(dict):
     pk = None
 
     @classmethod
-    def create(cls, response):
-        data = response.json()
+    def create(cls, url, response):
+        data = json.loads(response.content)
         evbobject = cls(data)
-        evbobject.resource_uri = response.url
-        evbobject.ok = response.ok
-        evbobject.elapsed = response.elapsed
+        evbobject.resource_uri = url
+        evbobject.ok = (response.status_code == 200)
+        evbobject.elapsed = 0
         evbobject.headers = response.headers
-        evbobject.reason = response.reason
+        evbobject.reason = 'Unknown'
         evbobject.status_code = response.status_code
         api_data_type = reverse(evbobject.resource_uri)
         # TODO: figure out what to do with endpoint, which doesn't have defined serializer
