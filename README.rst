@@ -86,5 +86,5 @@ Because this client interacts with Eventbrite's third API (a.k.a. APIv3), we are
 * * x.0.x where '0' is increased any time there is a significant change to the API that possibly breaks backwards compatibility
 * x.x.1 where '1' is increased on any release that does not break backwards comptability (small, new features, enhancements, bugfixes)
 
-.. _requests: https://pypi.python.org/pypi/requests
+.. _Google App Engine SDK: https://cloud.google.com/appengine/downloads
 .. _Eventbrite: https://www.eventbrite.com

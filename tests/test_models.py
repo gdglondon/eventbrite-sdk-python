@@ -7,8 +7,6 @@ from eventbrite.compat import PY3
 from eventbrite.models import EventbriteObject
 from eventbrite.utils import EVENTBRITE_API_URL
 
-from requests.structures import CaseInsensitiveDict
-
 from .base import unittest, mock
 
 
@@ -42,7 +40,7 @@ class TestEventbriteObject(unittest.TestCase):
             evbobject.resource_uri
         )
         self.assertTrue(isinstance(evbobject.elapsed, timedelta))
-        self.assertTrue(isinstance(evbobject.headers, CaseInsensitiveDict))
+        self.assertTrue(isinstance(evbobject.headers, unicode))
 
     @unittest.skipIf(condition=PY3, reason='Python 3 appears to return stdout')
     def test_pretty(self):

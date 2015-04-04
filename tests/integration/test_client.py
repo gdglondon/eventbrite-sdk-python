@@ -5,8 +5,6 @@ from __future__ import unicode_literals
 from datetime import timedelta, datetime
 import os
 
-from requests.structures import CaseInsensitiveDict
-
 from eventbrite import Eventbrite
 from eventbrite.models import EventbriteObject
 from eventbrite.utils import EVENTBRITE_API_URL
@@ -46,7 +44,7 @@ class TestClient(unittest.TestCase):
 
         self.assertTrue(payload.ok)
         self.assertTrue(isinstance(payload.elapsed, timedelta))
-        self.assertTrue(isinstance(payload.headers, CaseInsensitiveDict))
+        self.assertTrue(isinstance(payload.headers, unicode))
 
     @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
     def test_api_post(self):

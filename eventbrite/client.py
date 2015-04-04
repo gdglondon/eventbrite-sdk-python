@@ -3,8 +3,7 @@ from __future__ import unicode_literals
 import json
 from platform import platform
 
-import requests
-
+from google.appengine.api import urlfetch
 from .access_methods import AccessMethodsMixin
 from .compat import json, string_type
 from .decorators import objectify
@@ -58,19 +57,19 @@ class Eventbrite(AccessMethodsMixin):
     @objectify
     def get(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
-        return requests.get(path, headers=self.headers, params=data or {})
+        return urlfetch.fetch(path, payload=data or {}, method='GET', headers=self.headers)
 
     @objectify
     def post(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
         json_data = json.dumps(data or {})
-        return requests.post(path, headers=self.headers, data=json_data)
+        return urlfetch.fetch(path, payload=json_data, method='POST', headers=self.headers)
 
     @objectify
     def delete(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
         json_data = json.dumps(data or {})
-        return requests.delete(path, headers=self.headers, data=data or {})
+        return urlfetch.fetch(path, payload=data or {}, method='DELETE', headers=self.headers)
 
     ############################
     #

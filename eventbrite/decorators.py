@@ -1,6 +1,6 @@
 import functools
 
-import requests
+from google.appengine.api import urlfetch_errors
 
 from .exceptions import InternetConnectionError
 from .models import EventbriteObject
@@ -16,7 +16,7 @@ def objectify(func):
     def wrapper(*args, **kwargs):
         try:
             payload = func(*args, **kwargs)
-        except requests.exceptions.ConnectionError as e:
+        except urlfetch_errors.Error as e:
             raise InternetConnectionError(e)
         return EventbriteObject.create(payload)
     return wrapper
